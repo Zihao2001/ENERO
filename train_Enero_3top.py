@@ -3,7 +3,7 @@ import time as tt
 import resource
 import subprocess
 
-max_iters = 3000 # Total number of training episodes
+max_iters = 100 # Total number of training episodes
 episode_iters = 20 # How many training episodes to execute before the training script is called again
 
 # NOTICE: The training script trains and stores the models every 20 episode_iters. When the batch of episode_iters
