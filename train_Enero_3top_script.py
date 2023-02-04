@@ -27,7 +27,7 @@ ENV_NAME = 'GraphEnv-v16'
 # Indicates how many time-steps has an episode
 EPISODE_LENGTH = 100 # We are not using it now
 SEED = 42
-MINI_BATCH_SIZE = 55
+MINI_BATCH_SIZE = 32
 experiment_letter = "_B_NEW"
 take_critic_demands = True # True if we want to take the demands from the most critical links, True if we want to take the largest
 percentage_demands = 15 # Percentage of demands that will be used in the optimization
