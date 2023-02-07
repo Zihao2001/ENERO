@@ -41,9 +41,12 @@ The source code already provides the data, the results and the trained model use
 
 1. Download the dataset from [here](https://drive.google.com/file/d/1gem-VQ5MY3L54B77XUYt-rTbemyKmaqs/view?usp=sharing) or [here](https://bnn.upc.edu/download/enero-dataset/) and unzip it. The location should be immediatly outside of Enero's code directory. 
 
-![image](https://user-images.githubusercontent.com/87467979/215685300-de8c071d-c8f7-4ffa-be6a-c642f04a7d76.png)
+![Screenshot from 2023-02-08 00-12-17](https://user-images.githubusercontent.com/87467979/217303286-8217c57c-5115-4de8-b82a-103b8e5c1369.png)
 
 2. Then, enter in the unziped "Enero_datasets" directory and unzip everything.
+
+![Screenshot from 2023-02-08 00-12-41](https://user-images.githubusercontent.com/87467979/217303345-a6806331-2929-48b2-b260-7b9f03383744.png)
+
 
 ## Instructions to obtain the Figures from the paper
 
@@ -128,7 +131,7 @@ python figure_7.py -d SP_3top_15_B_NEW -p ../Enero_datasets/dataset_sing_top/dat
 
 ## Instructions to TRAIN
 
-1. To trail the DRL agent we must execute the following command. Notice that inside the *train_Enero_3top_script.py* there are different hyperparameters that you can configure to set the training for different topologies, to define the size of the GNN model, etc. Then, we execute the following script which executes the actual training script periodically. 
+1. To train the DRL agent we must execute the following command. Notice that inside the *train_Enero_3top_script.py* there are different hyperparameters that you can configure to set the training for different topologies, to define the size of the GNN model, etc. Then, we execute the following script which executes the actual training script periodically. 
 
 ```ruby
 python train_Enero_3top.py
