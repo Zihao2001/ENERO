@@ -47,7 +47,6 @@ The source code already provides the data, the results and the trained model use
 
 ![Screenshot from 2023-02-08 00-12-41](https://user-images.githubusercontent.com/87467979/217303345-a6806331-2929-48b2-b260-7b9f03383744.png)
 
-
 ## Instructions to obtain the Figures from the paper
 
 1. First, we execute the following command:
