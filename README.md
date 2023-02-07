@@ -41,9 +41,10 @@ The source code already provides the data, the results and the trained model use
 
 1. Download the dataset from [here](https://drive.google.com/file/d/1gem-VQ5MY3L54B77XUYt-rTbemyKmaqs/view?usp=sharing) or [here](https://bnn.upc.edu/download/enero-dataset/) and unzip it. The location should be immediatly outside of Enero's code directory. 
 
-![image](https://user-images.githubusercontent.com/87467979/215685300-de8c071d-c8f7-4ffa-be6a-c642f04a7d76.png)
+![image](https://ldbbs.ldmnq.com/bbs/topic/attachment/2023-2/9ab5a609-b952-4b2e-9d25-08f4e71a8a9b.png)
 
 2. Then, enter in the unziped "Enero_datasets" directory and unzip everything.
+
 
 ## Instructions to obtain the Figures from the paper
 
