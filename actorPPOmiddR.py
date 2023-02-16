@@ -9,13 +9,18 @@ class myModel(tf.keras.Model):
         self.hparams = hparams
 
         # Define layers here
+        # Message passing layer
+        '''
+        "Sequential" is a linear stack of layers that can be added one by one, and it's a common way to define neural
+        network architectures in Keras.
+        '''
         self.Message = tf.keras.models.Sequential()
         self.Message.add(keras.layers.Dense(self.hparams['link_state_dim'],
                                             kernel_initializer=hidden_init_actor,
                                             activation=tf.nn.selu, name="FirstLayer"))
-
+        # GRU-based update layer
         self.Update = tf.keras.layers.GRUCell(self.hparams['link_state_dim'], dtype=tf.float32)
-
+        # Multi-layer perceptron readout layer
         self.Readout = tf.keras.models.Sequential()
         self.Readout.add(keras.layers.Dense(self.hparams['readout_units'],
                                             activation=tf.nn.selu,
@@ -32,36 +37,34 @@ class myModel(tf.keras.Model):
         self.Readout.add(keras.layers.Dense(1, kernel_initializer=kernel_init_actor, name="Readout3"))
 
     def build(self, input_shape=None):
-        # Create the weights of the layer
+        # Creates the weights of the layers based on the input shapes
+        # TensorShape is used to define the input shape of layers
         self.Message.build(input_shape=tf.TensorShape([None, self.hparams['link_state_dim']*2]))
         self.Update.build(input_shape=tf.TensorShape([None,self.hparams['link_state_dim']]))
         self.Readout.build(input_shape=[None, self.hparams['link_state_dim']])
-        self.built = True
+        self.built = True # Set a flag indicating that the model has been built.
 
     #@tf.function
     def call(self, link_state, states_graph_ids, states_first, states_second, sates_num_edges, training=False):
-
+        # Define the forward pass through the neural network.
         # Execute T times
         for _ in range(self.hparams['T']):
-            # We have the combination of the hidden states of the main edges with the neighbours
+            '''
+            These lines gather the hidden state of the main edge and its neighboring edges, concatenate them along
+            the feature dimension, and store the concatenated tensor in edgesConcat.
+            '''
             mainEdges = tf.gather(link_state, states_first)
             neighEdges = tf.gather(link_state, states_second)
-
             edgesConcat = tf.concat([mainEdges, neighEdges], axis=1)
-
             ### 1.a Message passing for link with all it's neighbours
             outputs = self.Message(edgesConcat)
-
             ### 1.b Sum of output values according to link id index
             edges_inputs = tf.math.unsorted_segment_sum(data=outputs, segment_ids=states_second,
                                                         num_segments=sates_num_edges)
-
             ### 2. Update for each link
             # GRUcell needs a 3D tensor as state because there is a matmul: Wrap the link state
             outputs, links_state_list = self.Update(edges_inputs, [link_state])
-
-            link_state = links_state_list[0]
-
+            link_state = links_state_list[0] # update the state of link_state from the previous step.
         # Perform sum of all hidden states
         edges_combi_outputs = tf.math.segment_sum(link_state, states_graph_ids, name=None)
 
